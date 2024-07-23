@@ -10,9 +10,9 @@ public class Main {
 
     public static void main(String[] args) {
         try (Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
-             PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
-             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-             Scanner scanner = new Scanner(System.in)) {
+                PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                Scanner scanner = new Scanner(System.in)) {
 
             System.out.println("Connected to the server");
 
@@ -23,34 +23,35 @@ public class Main {
 
             while (running) {
                 if (!loggedIn) {
-                    System.out.println("1. Register");
-                    System.out.println("2. Login as Participant");
-                    System.out.println("3. Login as Representative");
-                    System.out.println("4. Exit");
+                    System.out.println(
+                            "Register(username first_name last_name email date_of_birth(YYYY-MM-DD) school_registration_number image_file_path password)");
+                    System.out.println("Login as Participant");
+                    System.out.println("Login as Representative");
+                    System.out.println("Exit");
+                    System.out.println();
 
-                    int choice = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
+                    String choice = scanner.nextLine().trim().toLowerCase();
 
                     switch (choice) {
-                        case 1:
+                        case "register":
                             // Call registerParticipant method from Register class
                             Register.registerParticipant(scanner, writer);
                             break;
 
-                        case 2:
+                        case "login as participant":
                             // Call loginParticipant method from Login class
                             loggedInUsername = Login.loginParticipant(scanner, writer);
                             loggedIn = loggedInUsername != null;
                             break;
 
-                        case 3:
+                        case "login as representative":
                             // Call loginRepresentative method from Login class
                             loggedInUsername = Login.loginRepresentative(scanner, writer);
                             loggedIn = loggedInUsername != null;
                             isRepresentative = loggedIn;
                             break;
 
-                        case 4:
+                        case "exit":
                             // Exit the application
                             System.out.println("Exiting...");
                             running = false;
@@ -62,26 +63,26 @@ public class Main {
                 } else {
                     if (isRepresentative) {
                         System.out.println("Welcome to the Mathematics Challenge System (Representative)");
-                        System.out.println("1. View Applicants");
-                        System.out.println("2. Confirm Applicant");
-                        System.out.println("3. Logout");
-                        System.out.println("4. Exit");
+                        System.out.println("View Applicants");
+                        System.out.println("Confirm Applicant");
+                        System.out.println("Logout");
+                        System.out.println("Exit");
+                        System.out.println();
 
-                        int choice = scanner.nextInt();
-                        scanner.nextLine(); // Consume newline
+                        String choice = scanner.nextLine().trim().toLowerCase();
 
                         switch (choice) {
-                            case 1:
+                            case "view applicants":
                                 // Implement viewApplicants method
                                 ViewApplicants.viewApplicants(writer);
                                 break;
 
-                            case 2:
+                            case "confirm applicant":
                                 // Call confirmApplicant method from ConfirmApplicant class
                                 ConfirmApplicant.confirmApplicant(scanner, writer);
                                 break;
 
-                            case 3:
+                            case "logout":
                                 // Logout
                                 loggedIn = false;
                                 isRepresentative = false;
@@ -89,7 +90,7 @@ public class Main {
                                 System.out.println("Logged out.");
                                 break;
 
-                            case 4:
+                            case "exit":
                                 // Exit the application
                                 System.out.println("Exiting...");
                                 running = false;
@@ -100,33 +101,33 @@ public class Main {
                         }
                     } else {
                         System.out.println("Welcome to the Mathematics Challenge System");
-                        System.out.println("1. View Challenges");
-                        System.out.println("2. Attempt Challenge");
-                        System.out.println("3. Logout");
-                        System.out.println("4. Exit");
+                        System.out.println("View Challenges");
+                        System.out.println("Attempt Challenge");
+                        System.out.println("Logout");
+                        System.out.println("Exit");
+                        System.out.println();
 
-                        int choice = scanner.nextInt();
-                        scanner.nextLine(); // Consume newline
+                        String choice = scanner.nextLine().trim().toLowerCase();
 
                         switch (choice) {
-                            case 1:
+                            case "view challenges":
                                 // Call viewChallenges method from ViewChallenges class
                                 ViewChallenges.viewChallenges(writer);
                                 break;
 
-                            case 2:
+                            case "attempt challenge":
                                 // Call attemptChallenge method from AttemptChallenge class
                                 AttemptChallenge.attemptChallenge(scanner, writer);
                                 break;
 
-                            case 3:
+                            case "logout":
                                 // Logout
                                 loggedIn = false;
                                 loggedInUsername = null;
                                 System.out.println("Logged out.");
                                 break;
 
-                            case 4:
+                            case "exit":
                                 // Exit the application
                                 System.out.println("Exiting...");
                                 running = false;

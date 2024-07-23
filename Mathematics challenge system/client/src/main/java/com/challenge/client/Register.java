@@ -37,13 +37,16 @@ public class Register {
         // Send this data to the server
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mathematics_challenge", "root",
                 "")) {
+            // Check if the provided school registration number exists
             String schoolIdQuery = "SELECT id FROM Schools WHERE registration_number = ?";
             PreparedStatement schoolIdStmt = conn.prepareStatement(schoolIdQuery);
             schoolIdStmt.setString(1, schoolRegNum);
             ResultSet rs = schoolIdStmt.executeQuery();
+
             if (rs.next()) {
                 int schoolId = rs.getInt("id");
 
+                // Insert the new participant's data into the Participants table
                 String query = "INSERT INTO Participants (username, first_name, last_name, email, date_of_birth, school_id, image_path, password, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'Pending')";
                 PreparedStatement stmt = conn.prepareStatement(query);
                 stmt.setString(1, username);
