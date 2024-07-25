@@ -12,15 +12,13 @@ public class Main {
 
         try {
             DatabaseManager dbManager = initializeDatabaseManager();
-            FileManager fileManager = new FileManager();
+            // FileManager fileManager = new FileManager();
             ChallengeManager challengeManager = new ChallengeManager(dbManager);
             EmailService emailService = new EmailService(); // Blank implementation
 
-            challengeManager.createChallenge("Math Challenge 1", "2024-06-01", "2024-06-30", "01:00:00");
-            int challengeId = getChallengeId(dbManager, "Math Challenge 1");
-
-            List<Question> questions = fileManager.readQuestionsFromExcel("questions.xlsx");
-            insertQuestions(dbManager, questions, challengeId);
+            // List<Question> questions =
+            // fileManager.readQuestionsFromExcel("questions.xlsx");
+            // insertQuestions(dbManager, questions, challengeId);
 
             emailService.sendEmail("recipient@example.com", "Challenge Created", "A new challenge has been created.");
 

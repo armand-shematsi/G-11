@@ -9,5 +9,5 @@ class Representative extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'school_id'];
+    protected $fillable = ['name', 'email', 'school_id', 'password'];
 }

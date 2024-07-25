@@ -13,6 +13,7 @@ class CreateRepresentativesTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->foreignId('school_id')->constrained()->onDelete('cascade');
+            $table->string('password'); // password
             $table->timestamps();
         });
     }

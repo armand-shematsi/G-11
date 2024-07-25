@@ -295,11 +295,18 @@
                     </div>
                   </div>
                   <div class="row mb-3">
+                    <label for="password" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                      <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
                     <div class="col-sm-10 offset-sm-2">
                       <button type="submit" class="btn btn-primary">Add Representative</button>
                     </div>
                   </div>
                 </form>
+
               </div>
               <!-- End General Form Elements -->
 

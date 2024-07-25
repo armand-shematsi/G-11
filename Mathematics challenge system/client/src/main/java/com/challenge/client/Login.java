@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Login {
     public static String loginParticipant(Scanner scanner, PrintWriter writer) {
         System.out.println("Enter your username and password separated by a space:");
-        
+
         String input = scanner.nextLine();
         String[] data = input.split(" ");
 
@@ -25,7 +25,8 @@ public class Login {
         String password = data[1];
 
         // Verify the username and password
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mathematics_challenge", "root", "")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mathematics_challenge", "root",
+                "")) {
             String query = "SELECT * FROM Participants WHERE username = ? AND password = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, username);
@@ -47,15 +48,27 @@ public class Login {
     }
 
     public static String loginRepresentative(Scanner scanner, PrintWriter writer) {
-        System.out.println("Enter your name:");
-        
-        String name = scanner.nextLine();
+        System.out.println("Enter your name and password separated by a space:");
 
-        // Verify the name
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mathematics_challenge", "root", "")) {
-            String query = "SELECT * FROM Representatives WHERE name = ?";
+        String input = scanner.nextLine();
+        String[] data = input.split(" ");
+
+        // Ensure the correct number of fields are provided
+        if (data.length != 2) {
+            System.out.println("Invalid input. Please enter your name and password separated by a space.");
+            return null;
+        }
+
+        String name = data[0];
+        String password = data[1];
+
+        // Verify the name and password
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mathematics_challenge", "root",
+                "")) {
+            String query = "SELECT * FROM Representatives WHERE name = ? AND password = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, name);
+            stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -63,7 +76,7 @@ public class Login {
                 System.out.println("Login successful. Welcome, " + name + "!");
                 return name;
             } else {
-                System.out.println("Invalid name.");
+                System.out.println("Invalid name or password.");
                 return null;
             }
         } catch (SQLException e) {
