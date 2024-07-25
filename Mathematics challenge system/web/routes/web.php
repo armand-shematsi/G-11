@@ -15,7 +15,9 @@ Route::get('/dashboard', function () {
 });
 
 //form
-Route::post('/form', [ChallengeController::class, 'create'])->name('form.submit');
+Route::post('/challenge', [ChallengeController::class, 'createChallenge'])->name('challenge.submit');
+Route::post('/school', [ChallengeController::class, 'createSchool'])->name('school.submit');
+Route::post('/representative', [ChallengeController::class, 'createRepresentative'])->name('representative.submit');
 Route::view('/form', 'form')->name('form.show');  // This handles displaying the form
 
 //dash

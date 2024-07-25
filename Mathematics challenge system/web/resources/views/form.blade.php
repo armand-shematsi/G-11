@@ -193,9 +193,7 @@
     </div><!-- End Page Title -->
 
     <section class="section">
-      @if(session('success'))
-      <div>{{ session('success') }}</div>
-      @endif
+
       <div class="row">
         <div class="col-lg-6">
 
@@ -204,38 +202,105 @@
               <h5 class="card-title">Form</h5>
 
               <!-- General Form Elements -->
-              <form action="{{ route('form.submit') }}" method="POST">
-                @csrf
-                <div class="row mb-3">
-                  <label for="challengeName" class="col-sm-2 col-form-label">Challenge Name</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="challengeName" name="challengeName" required>
-                  </div>
+              <div class="container">
+                <h1>Create Challenge, School, and Representative</h1>
+
+                @if (session('success'))
+                <div class="alert alert-success">
+                  {{ session('success') }}
                 </div>
-                <div class="row mb-3">
-                  <label for="startDate" class="col-sm-2 col-form-label">Start Date</label>
-                  <div class="col-sm-10">
-                    <input type="date" class="form-control" id="startDate" name="startDate" required>
+                @endif
+
+                <h2>Challenge Details</h2>
+                <form action="{{ route('challenge.submit') }}" method="POST">
+                  @csrf
+                  <div class="row mb-3">
+                    <label for="challengeName" class="col-sm-2 col-form-label">Challenge Name</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="challengeName" name="challengeName" required>
+                    </div>
                   </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="endDate" class="col-sm-2 col-form-label">End Date</label>
-                  <div class="col-sm-10">
-                    <input type="date" class="form-control" id="endDate" name="endDate" required>
+                  <div class="row mb-3">
+                    <label for="startDate" class="col-sm-2 col-form-label">Start Date</label>
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control" id="startDate" name="startDate" required>
+                    </div>
                   </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="duration" class="col-sm-2 col-form-label">Duration</label>
-                  <div class="col-sm-10">
-                    <input type="time" class="form-control" id="duration" name="duration" required>
+                  <div class="row mb-3">
+                    <label for="endDate" class="col-sm-2 col-form-label">End Date</label>
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control" id="endDate" name="endDate" required>
+                    </div>
                   </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="col-sm-10 offset-sm-2">
-                    <button type="submit" class="btn btn-primary">Create Challenge</button>
+                  <div class="row mb-3">
+                    <label for="duration" class="col-sm-2 col-form-label">Duration</label>
+                    <div class="col-sm-10">
+                      <input type="time" class="form-control" id="duration" name="duration" required>
+                    </div>
                   </div>
-                </div>
-              </form>
+                  <div class="row mb-3">
+                    <div class="col-sm-10 offset-sm-2">
+                      <button type="submit" class="btn btn-primary">Create Challenge</button>
+                    </div>
+                  </div>
+                </form>
+
+                <h2>School Details</h2>
+                <form action="{{ route('school.submit') }}" method="POST">
+                  @csrf
+                  <div class="row mb-3">
+                    <label for="schoolName" class="col-sm-2 col-form-label">School Name</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="schoolName" name="schoolName" required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="district" class="col-sm-2 col-form-label">District</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="district" name="district" required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="registrationNumber" class="col-sm-2 col-form-label">Registration Number</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="registrationNumber" name="registrationNumber" required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-sm-10 offset-sm-2">
+                      <button type="submit" class="btn btn-primary">Add School</button>
+                    </div>
+                  </div>
+                </form>
+
+                <h2>Representative Details</h2>
+                <form action="{{ route('representative.submit') }}" method="POST">
+                  @csrf
+                  <div class="row mb-3">
+                    <label for="representativeName" class="col-sm-2 col-form-label">Representative Name</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="representativeName" name="representativeName" required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="representativeEmail" class="col-sm-2 col-form-label">Representative Email</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="representativeEmail" name="representativeEmail" required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="schoolId" class="col-sm-2 col-form-label">School ID</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="schoolId" name="schoolId" required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-sm-10 offset-sm-2">
+                      <button type="submit" class="btn btn-primary">Add Representative</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
               <!-- End General Form Elements -->
 
             </div>
